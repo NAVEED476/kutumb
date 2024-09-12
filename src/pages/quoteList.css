@@ -1,0 +1,44 @@
+.quote-list-page {
+    padding: 20px;
+    background-color: #f9f9f9;
+    min-height: 100vh;
+    /* width: 100vw; */
+ 
+  }
+  .quotes-list{
+    display: flex;
+  }
+  
+  .quote-list-page h1 {
+    font-size: 2rem;
+    color: #333;
+    margin-bottom: 20px;
+  }
+  
+  .quote-list-page button {
+    padding: 10px 15px;
+    border-radius: 4px;
+    border: none;
+    background-color: #007bff;
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+    margin: 10px 5px;
+  }
+  
+  .quote-list-page button:hover {
+    background-color: #0056b3;
+  }
+  
+  .quote-list-page .create-button {
+    background-color: #28a745;
+  }
+  
+  .quote-list-page .create-button:hover {
+    background-color: #218838;
+  }
+  
+  .quote-list-page .load-more-button {
+    margin-top: 20px;
+  }
+  

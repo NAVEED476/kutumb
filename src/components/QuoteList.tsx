@@ -13,9 +13,14 @@ interface QuoteListProps {
   quotes: Quote[];
 }
 
-const QuoteList: React.FC<QuoteListProps> = ({ quotes }) => {
+const QuoteList: React.FC<QuoteListProps> = ({ quotes = [] }) => {
+  if (!Array.isArray(quotes)) {
+    console.error('Quotes prop is not an array:', quotes);
+    return <div>Error: Quotes data is not valid.</div>;
+  }
+
   return (
-    <div>
+    <div style={{display:'flex', flexWrap:'wrap'}}>
       {quotes.map((quote) => (
         <QuoteItem key={quote.id} quote={quote} />
       ))}

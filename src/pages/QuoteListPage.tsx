@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { getQuotes } from '../services/api';
 import QuoteList from '../components/QuoteList';
+import './quoteList.css';
 
 interface Quote {
   id: string;
@@ -18,30 +19,41 @@ const QuoteListPage: React.FC = () => {
 
   const fetchQuotes = async () => {
     try {
-      const newQuotes = await getQuotes(20, offset);
-      if (newQuotes.length === 0) {
-        setHasMore(false);
+      const response: any = await getQuotes(20, offset);
+      const newQuotes = response.data;
+  
+      if (Array.isArray(newQuotes)) {
+        if (newQuotes.length === 0) {
+          setHasMore(false);
+        } else {
+          setQuotes((prevQuotes) => [...prevQuotes, ...newQuotes]);
+          setOffset((prevOffset) => prevOffset + newQuotes.length);
+        }
       } else {
-        setQuotes((prevQuotes) => [...prevQuotes, ...newQuotes]);
-        setOffset((prevOffset) => prevOffset + newQuotes.length);
+        console.error('API response data is not an array:', newQuotes);
       }
     } catch (error) {
       console.error('Failed to fetch quotes:', error);
-      // Handle error (e.g., show error message)
     }
   };
+  
 
   useEffect(() => {
     fetchQuotes();
   }, []);
 
   return (
-    <div>
-      <h1>Quotes</h1>
-      <QuoteList quotes={quotes} />
-      {hasMore && <button onClick={fetchQuotes}>Load More</button>}
+    <div className="quote-list-page">
+      <h1>Quotes of the Day!</h1>
       <Link to="/create-quote">
-        <button>Create Quote</button>
+        <button className="create-button">Create Quote</button>
+      </Link>
+      <div className='quotes-list'>
+      <QuoteList quotes={quotes} />
+      </div>
+      {hasMore && <button className="load-more-button" onClick={fetchQuotes}>Load More</button>}
+      <Link to="/create-quote">
+        <button className="create-button">Create Quote</button>
       </Link>
     </div>
   );

@@ -1,4 +1,4 @@
-// src/App.tsx
+
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes, Navigate, Outlet } from 'react-router-dom';
 import LoginPage from './pages/LoginPage';

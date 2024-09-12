@@ -1,4 +1,5 @@
 import React from 'react';
+import './quote.css';
 
 interface QuoteItemProps {
   quote: {
@@ -17,7 +18,6 @@ const QuoteItem: React.FC<QuoteItemProps> = ({ quote }) => {
       </div>
       <div className="quote-info">
         <p>Posted by: {quote.username}</p>
-        <p>Created at: {new Date(quote.created_at).toLocaleString()}</p>
       </div>
     </div>
   );

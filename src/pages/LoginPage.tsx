@@ -1,8 +1,8 @@
-// src/pages/LoginPage.tsx
 import React, { useState } from 'react';
 import { useNavigate, Navigate } from 'react-router-dom';
 import { login as apiLogin } from '../services/api';
 import { useAuth } from '../services/auth';
+import './login.css';
 
 const LoginPage: React.FC = () => {
   const [username, setUsername] = useState('');
@@ -28,26 +28,30 @@ const LoginPage: React.FC = () => {
   };
 
   return (
-    <div>
-      <h1>Login</h1>
-      {error && <p style={{ color: 'red' }}>{error}</p>}
-      <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-          placeholder="Username"
-          required
-        />
-        <input
-          type="text"
-          value={otp}
-          onChange={(e) => setOtp(e.target.value)}
-          placeholder="OTP"
-          required
-        />
-        <button type="submit">Login</button>
-      </form>
+    <div className="container">
+      <div className="card">
+        <h1 className='login_header'>Login</h1>
+        {error && <p className="error">{error}</p>}
+        <form onSubmit={handleSubmit} className="form">
+          <input
+            type="text"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+            placeholder="Username"
+            required
+            className="input"
+          />
+          <input
+            type="text"
+            value={otp}
+            onChange={(e) => setOtp(e.target.value)}
+            placeholder="OTP"
+            required
+            className="input"
+          />
+          <button type="submit" className="button">Login</button>
+        </form>
+      </div>
     </div>
   );
 };
