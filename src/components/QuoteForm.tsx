@@ -29,6 +29,7 @@ const QuoteFormPage: React.FC = () => {
 
     try {
       const uploadResponse = await uploadImage(file);
+      console.log('Upload Response:', uploadResponse);
       const mediaUrl = uploadResponse.mediaUrl;
       await createQuote(text, mediaUrl);
       navigate('/quotes');

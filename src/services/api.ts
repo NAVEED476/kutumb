@@ -23,9 +23,21 @@ export const login = async (username: string, otp: string) => {
 export const uploadImage = async (file: File) => {
   const formData = new FormData();
   formData.append('file', file);
-  const response = await axios.post(MEDIA_UPLOAD_URL, formData);
-  return response.data;
+  try {
+    const response = await axios.post(MEDIA_UPLOAD_URL, formData);
+    console.log('Upload Response:', response.data);
+    const mediaUrl = response.data?.[0]?.url;
+    if (!mediaUrl) {
+      throw new Error('Media URL not found in the response');
+    }
+    return { mediaUrl };
+  } catch (error) {
+    console.error('Upload Error:', error);
+    throw error;
+  }
 };
+
+
 
 export const createQuote = async (text: string, mediaUrl: string) => {
   const response = await api.post('/postQuote', { text, mediaUrl });
